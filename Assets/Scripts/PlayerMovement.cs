@@ -1,16 +1,14 @@
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rigidBody;
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpHeight;
     [SerializeField] float sensitivity;
     [SerializeField] bool isGrounded;
+    public float rayLength = 1f;
+    public Vector3 rayDirection = Vector3.down + Vector3.right;
     float xAxis, zAxis, mouseMovementX, mouseMovementY;
 
 
@@ -22,7 +20,9 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        PlayerMovement();
+        Ray();
+
+        PlayerMove();
 
         MouseFollow();
 
@@ -53,7 +53,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    void PlayerMovement()
+    void PlayerMove()
     {
         xAxis = Input.GetAxis("Horizontal") * moveSpeed;
         zAxis = Input.GetAxis("Vertical") * moveSpeed;
@@ -74,5 +74,22 @@ public class PlayerControl : MonoBehaviour
     {
         mouseMovementX = Input.GetAxis("Mouse X") * sensitivity;
         gameObject.transform.Rotate(0f, mouseMovementX, 0f);
+    }
+
+    void Ray()
+    {
+        Ray ray = new Ray(transform.position, rayDirection.normalized);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, rayLength))
+        {
+            Debug.DrawRay(transform.position, rayDirection.normalized * rayLength, Color.red);
+            isGrounded = true;
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, rayDirection.normalized * rayLength, Color.green);
+        }
+
     }
 }
