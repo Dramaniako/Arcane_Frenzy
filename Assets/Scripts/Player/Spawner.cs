@@ -16,10 +16,14 @@ public class Spawner : MonoBehaviour
 
     void FireBullet()
     {
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        Vector3 direction = ray.direction;
+        // 1. Use firePoint's forward direction as the shooting direction
+        Vector3 direction = firePoint.forward;
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        // 2. Instantiate bullet facing that direction
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(direction));
+
+        // 3. Launch the bullet in that direction
         bullet.GetComponent<MagicBullet>().Launch(direction);
+
     }
 }

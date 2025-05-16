@@ -15,12 +15,20 @@ public class MagicBullet : MonoBehaviour
 
     public void Launch(Vector3 direction)
     {
-        rigidBody.linearVelocity = direction.normalized * speed;
+        GetComponent<Rigidbody>().AddForce(direction * speed, ForceMode.Impulse);
     }
 
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(disappear);
         Destroy(gameObject);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
     }
 }

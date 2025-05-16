@@ -3,18 +3,25 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody rigidBody;
+    public Transform cameraTransform; // drag your Camera here in the inspector
+    private float pitch = 0f;
+
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpHeight;
     [SerializeField] float sensitivity;
-    [SerializeField] bool isGrounded;
+    public float accelerationTime = 0.1f;
+    private Vector3 smoothMoveVelocity;
+
+    private bool isGrounded = true;
+    public float smoothTime = 0.05f;
     public float rayLength = 1f;
     public Vector3 rayDirection = Vector3.down + Vector3.right;
-    float xAxis, zAxis, mouseMovementX, mouseMovementY;
 
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        rigidBody = GetComponent<Rigidbody>();
     }
 
 
@@ -22,11 +29,17 @@ public class PlayerMovement : MonoBehaviour
     {
         Ray();
 
-        PlayerMove();
-
-        MouseFollow();
-
         Jump();
+    }
+
+    void FixedUpdate()
+    {
+        PlayerMove();
+    }
+
+    void LateUpdate()
+    {
+        MouseFollow();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -55,26 +68,51 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerMove()
     {
-        xAxis = Input.GetAxis("Horizontal") * moveSpeed;
-        zAxis = Input.GetAxis("Vertical") * moveSpeed;
+        float xAxis = Input.GetAxisRaw("Horizontal");
+        float zAxis = Input.GetAxisRaw("Vertical");
 
         Vector3 moveInput = new Vector3(xAxis, 0f, zAxis).normalized;
 
-        Vector3 moveDirection = transform.TransformDirection(moveInput);
+        // Transform local input to world space direction
+        Vector3 targetVelocity = transform.TransformDirection(moveInput) * moveSpeed;
 
+        // Ground/air control adjustment
         float controlMultiplier = isGrounded ? 1f : 0.5f;
+        targetVelocity *= controlMultiplier;
 
-        Vector3 velocity = moveDirection * moveSpeed * controlMultiplier;
-        velocity.y = rigidBody.linearVelocity.y;
+        // Smooth acceleration/deceleration
+        Vector3 velocity = Vector3.SmoothDamp(
+            rigidBody.linearVelocity,
+            new Vector3(targetVelocity.x, rigidBody.linearVelocity.y, targetVelocity.z),
+            ref smoothMoveVelocity,
+            accelerationTime
+        );
+
+        // Stop immediately when input is zero
+        if (moveInput == Vector3.zero)
+        {
+            velocity.x = 0f;
+            velocity.z = 0f;
+        }
 
         rigidBody.linearVelocity = velocity;
+
     }
 
     void MouseFollow()
     {
-        mouseMovementX = Input.GetAxis("Mouse X") * sensitivity;
-        gameObject.transform.Rotate(0f, mouseMovementX, 0f);
+        float mouseX = Input.GetAxisRaw("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * sensitivity;
+
+        // Rotate player on Y axis
+        transform.Rotate(Vector3.up * mouseX);
+
+        // Rotate camera on X axis (pitch)
+        pitch -= mouseY;
+        pitch = Mathf.Clamp(pitch, -80f, 80f);
+        cameraTransform.localEulerAngles = new Vector3(pitch, 0f, 0f);
     }
+
 
     void Ray()
     {

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Trampoline
   - Ground
+  - Enemy
+  - Attack
   layers:
   - Default
   - TransparentFX
