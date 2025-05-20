@@ -1,15 +1,28 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject enemy;
     public GameObject player;
+    public PlayerStats playerStats;
+    public int killCount = 0;
     public float spawnRadius = 5f;
     void Start()
     {
+        playerStats = FindFirstObjectByType<PlayerStats>();
         StartCoroutine(Spawn());
     }
+
+    void Update()
+    {
+        if (killCount == 10 || playerStats.health <= 0f)
+        {
+            SceneManager.LoadScene("Game_Over");
+        }
+    }
+
     IEnumerator Spawn()
     {
         for (int i = 0; i < 10; i++)

@@ -4,13 +4,24 @@ public class EnemyBehaviour : MonoBehaviour
 {
     public GameObject player;
     public Vector3 playerPosition;
+    public GameManager gameManager;
     public float speed = 0.01f;
     public int health = 3;
     public bool grounded;
+
+    void Start()
+    {
+        if (gameManager == null)
+        {
+            gameManager = FindFirstObjectByType<GameManager>();
+        }
+    }
+
     void Update()
     {
         if (health == 0)
         {
+            gameManager.killCount += 1;
             Destroy(gameObject);
         }
 

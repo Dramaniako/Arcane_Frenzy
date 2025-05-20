@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     public float rayLength = 1f;
     public Vector3 rayDirection = Vector3.down + Vector3.right;
 
-
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
