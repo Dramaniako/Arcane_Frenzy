@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 207785944861404330}
   - component: {fileID: 8787826992916726557}
   - component: {fileID: 555295336207372106}
+  - component: {fileID: 6246905420369307250}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -175,9 +176,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76eca5169fb87848818ea25fb53ac84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1321396519498100329, guid: 2b33dc640fce19e41b0b21c80b405375, type: 3}
+  Magic_Bullet: {fileID: 1321396519498100329, guid: 2b33dc640fce19e41b0b21c80b405375, type: 3}
+  Ice_Bullet: {fileID: 7627464508154229325, guid: bea8f2e160c1e7046bffec9f2cae43f5, type: 3}
+  Lightning: {fileID: 1349262764813391732, guid: 73c0d55ef10168144812d35d763ab6fc, type: 3}
   firePoint: {fileID: 5009808245400802795}
   playerCamera: {fileID: 5293106219725983855}
+  attack: {fileID: 6246905420369307250}
 --- !u!114 &555295336207372106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +195,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+--- !u!114 &6246905420369307250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141310169704440464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0468332fd4ab44190b6052064d2385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spell: 0
 --- !u!1 &5776606241709243702
 GameObject:
   m_ObjectHideFlags: 0
