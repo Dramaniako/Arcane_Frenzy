@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public PlayerStats playerStats;
     public int killCount = 0;
     public float spawnRadius = 5f;
+    public int level = 1;
+
     void Start()
     {
         playerStats = FindFirstObjectByType<PlayerStats>();
@@ -17,17 +19,22 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (killCount == 10 || playerStats.health <= 0f)
+        if (playerStats.health <= 0f)
         {
             SceneManager.LoadScene("Game_Over");
+        }
+        if (killCount == level * 10)
+        {
+            killCount = 0;
+            level += 1;
         }
     }
 
     IEnumerator Spawn()
     {
-        for (int i = 0; i < 10; i++)
+        while (playerStats.health != 0f)
         {
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(3 - level);
             // Generate a random position around the spawner
             Vector2 randomOffset2D = Random.insideUnitCircle * spawnRadius;
             Vector3 spawnPosition = transform.position + new Vector3(randomOffset2D.x, 0f, randomOffset2D.y);
