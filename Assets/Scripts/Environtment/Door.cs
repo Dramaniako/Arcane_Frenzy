@@ -14,7 +14,7 @@ public class Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.killCount == 1 && down == false)
+        if (gameManager.killCount == 30 && down == false)
         {
             transform.Translate(0f, -50f, 0f);
             down = true;

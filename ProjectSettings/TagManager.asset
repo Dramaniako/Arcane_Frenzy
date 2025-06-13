@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Enemy
   - Attack
+  - Trophy
+  - Start
   layers:
   - Default
   - TransparentFX

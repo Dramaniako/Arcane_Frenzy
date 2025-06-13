@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    void FireBullet()
+    public void FireBullet()
     {
         // 1. Use firePoint's forward direction as the shooting direction
         Vector3 direction = firePoint.forward;
