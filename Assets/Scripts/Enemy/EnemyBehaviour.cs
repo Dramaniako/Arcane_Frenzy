@@ -8,14 +8,12 @@ public class EnemyBehaviour : MonoBehaviour
     public float speed = 0.01f;
     public int health = 3;
     public bool grounded;
-    public PlayerStats playerStats;
 
     void Start()
     {
-        if (gameManager == null || playerStats == null)
+        if (gameManager == null)
         {
             gameManager = FindFirstObjectByType<GameManager>();
-            playerStats = FindFirstObjectByType<PlayerStats>();
         }
     }
 
@@ -25,7 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             gameManager.killCount += 1;
             Destroy(gameObject);
-            playerStats.money += 1;
+            gameManager.playerStats.money += 1;
         }
 
         if (player != null && grounded == true)

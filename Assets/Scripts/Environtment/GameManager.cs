@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerStats = FindFirstObjectByType<PlayerStats>();
         StartCoroutine(Spawn());
+        Debug.Log("Game Manager Started");
     }
 
     void Update()
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator Spawn()
     {
-        if (playerStats.health != 0f && rest == false)
+        if (rest == false)
         {
             for (int i = 0; i < level * 10; i++)
             {

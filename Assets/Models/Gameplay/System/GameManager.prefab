@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7257428351396479473}
   - component: {fileID: 2818935420771929169}
+  - component: {fileID: 828450700170373915}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,5 +47,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1276014737593398928, guid: b13b05f87c1475b4a91bad19724fc477, type: 3}
   player: {fileID: 0}
+  platform: {fileID: 0}
+  playerStats: {fileID: 0}
   killCount: 0
   spawnRadius: 5
+  level: 1
+  rest: 0
+--- !u!114 &828450700170373915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147190958502625302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b867cda0894016b47b2028a56af04724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  money: 0

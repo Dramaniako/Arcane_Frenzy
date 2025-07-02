@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 1770763342220744820}
   - component: {fileID: 207785944861404330}
   - component: {fileID: 8787826992916726557}
-  - component: {fileID: 555295336207372106}
   - component: {fileID: 6246905420369307250}
+  - component: {fileID: 7503173984781097012}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -186,20 +186,6 @@ MonoBehaviour:
   firePoint: {fileID: 5009808245400802795}
   playerCamera: {fileID: 5293106219725983855}
   attack: {fileID: 6246905420369307250}
---- !u!114 &555295336207372106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141310169704440464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b867cda0894016b47b2028a56af04724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
-  money: 0
 --- !u!114 &6246905420369307250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +199,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spell: 0
+--- !u!114 &7503173984781097012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141310169704440464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f380c7f652870c04eb76608548dec8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1 &5776606241709243702
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +553,7 @@ MonoBehaviour:
   level: {fileID: 90067749490259182}
   money: {fileID: 6952026411289598741}
   health: {fileID: 3407010672641297065}
-  playerStats: {fileID: 555295336207372106}
+  playerStats: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!114 &3407010672641297065 stripped
 MonoBehaviour:
